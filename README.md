@@ -1,4 +1,4 @@
-# Dibimbing, Data Engineering Bootcamp
+# Dibimbing-Ajied, Data Engineering Bootcamp
 
 1. Clone This Repo.
 2. Run `make docker-build` 

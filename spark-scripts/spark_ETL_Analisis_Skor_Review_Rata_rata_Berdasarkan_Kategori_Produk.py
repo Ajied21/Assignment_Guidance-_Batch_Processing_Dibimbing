@@ -35,7 +35,7 @@ jdbc_properties = {
 }
 
 # Load dataset
-products_df = spark.read.csv("/data/olist/olist_products_dataset.csv", 
+olist_products_dataset = spark.read.csv("/data/olist/olist_products_dataset.csv", 
                              header=True, 
                              schema=StructType([
                                     StructField("product_id", StringType(), True),
@@ -50,7 +50,7 @@ products_df = spark.read.csv("/data/olist/olist_products_dataset.csv",
                                 ])
                                 )
 
-reviews_df = spark.read.csv("/data/olist/olist_order_reviews_dataset.csv", 
+olist_order_reviews_dataset = spark.read.csv("/data/olist/olist_order_reviews_dataset.csv", 
                             header=True, 
                             schema=StructType([
                                    StructField("review_id", StringType(), True),
@@ -63,7 +63,7 @@ reviews_df = spark.read.csv("/data/olist/olist_order_reviews_dataset.csv",
                                 ])
                                 )
 
-items_df = spark.read.csv("/data/olist/olist_order_items_dataset.csv", 
+olist_order_items_dataset = spark.read.csv("/data/olist/olist_order_items_dataset.csv", 
                           header=True,
                           schema=StructType([
                                  StructField("order_id", StringType(), True),
@@ -77,7 +77,7 @@ items_df = spark.read.csv("/data/olist/olist_order_items_dataset.csv",
                                  )
 
 # Gabungkan items dan review berdasarkan order_id, lalu join dengan products berdasarkan product_id
-product_reviews_df = items_df.join(reviews_df, on="order_id", how="inner").join(products_df, on="product_id", how="inner")
+product_reviews_df = olist_order_items_dataset.join(olist_order_reviews_dataset, on="order_id", how="inner").join(olist_products_dataset, on="product_id", how="inner")
 
 # Agregasi rata-rata skor review
 review_score_by_category = product_reviews_df.groupBy("order_id", "seller_id", "product_id", "review_id", "product_category_name").agg(

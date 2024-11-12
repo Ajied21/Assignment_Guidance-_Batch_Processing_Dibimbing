@@ -28,7 +28,7 @@ def spark_ETL_Simple_Agregasi_Dibimbing():
     start_task = EmptyOperator(task_id="start_task")
 
     # Gunakan SparkSubmitOperator langsung dalam DAG
-    ETL = SparkSubmitOperator(
+    etl = SparkSubmitOperator(
         application="/spark-scripts/spark_ETL_Analisis_Churn-Retention_Pelanggan_Berdasarkan_Aktivitas_Transaksi_Terakhir.py",
         conn_id="spark_main",
         task_id="spark_submit_task",
@@ -38,6 +38,6 @@ def spark_ETL_Simple_Agregasi_Dibimbing():
     end_task = EmptyOperator(task_id="end_task")
     
     # Definisikan alur eksekusi
-    start_task >> ETL >> end_task
+    start_task >> etl >> end_task
 
 spark_ETL_Simple_Agregasi_Dibimbing()

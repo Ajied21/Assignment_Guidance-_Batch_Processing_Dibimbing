@@ -30,13 +30,11 @@ jupyter:
 	@docker compose -f ./docker/docker-compose-jupyter.yml --env-file .env up -d
 	@echo 'Created...'
 	@echo 'Processing token...'
-# @sleep 20
-	@powershell -Command "Start-Sleep -Seconds 1" 
 # @docker logs ${JUPYTER_CONTAINER_NAME} 2>&1 | grep '\?token\=' -m 1 | cut -d '=' -f2
 	@powershell -Command "$$token = docker logs dibimbing-jupyter 2>&1 | Select-String -Pattern '\?token=' | Select-Object -First 1; $$final = ($$token -split 'token=')[1] -split '&'; $$final"
 	@echo '==========================================================='
 
-postgres: postgres-create postgres-create-warehouse postgres-create-table postgres-ingest-csv
+postgres: postgres-create postgres-create-warehouse
 
 postgres-create:
 	@docker compose -f ./docker/docker-compose-postgres.yml --env-file .env up -d
@@ -47,22 +45,6 @@ postgres-create:
 		echo 'Postgres Account	: ${POSTGRES_USER}' &&\
 		echo 'Postgres password	: ${POSTGRES_PASSWORD}' &&\
 		echo 'Postgres Db		: ${POSTGRES_DW_DB}'
-# @sleep 5
-	@powershell -Command "Start-Sleep -Seconds 1" 
-	@echo '==========================================================='
-
-postgres-create-table:
-	@echo '__________________________________________________________'
-	@echo 'Creating tables...'
-	@echo '_________________________________________'
-	@docker exec -it ${POSTGRES_CONTAINER_NAME} psql -U ${POSTGRES_USER} -d ${POSTGRES_DW_DB} -f sql/ddl-retail.sql
-	@echo '==========================================================='
-
-postgres-ingest-csv:
-	@echo '__________________________________________________________'
-	@echo 'Ingesting CSV...'
-	@echo '_________________________________________'
-	@docker exec -it ${POSTGRES_CONTAINER_NAME} psql -U ${POSTGRES_USER} -d ${POSTGRES_DW_DB} -f sql/ingest-retail.sql
 	@echo '==========================================================='
 
 postgres-create-warehouse:

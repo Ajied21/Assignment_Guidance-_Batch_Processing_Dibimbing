@@ -69,7 +69,9 @@ list code
 * Bila terjadi error saat build dan menjalankan beberapa container disarankan menjalankan ini:
 
 1. Run perintah ini dan pastikan semua container dalam keadaan stop atau tidak menyala
-`git config --global core.autocrlf input`
+```
+git config --global core.autocrlf input
+```
 
 2. Atur ulang repo menggunakan ini (jangan lupa simpan perubahan Anda):
 ```

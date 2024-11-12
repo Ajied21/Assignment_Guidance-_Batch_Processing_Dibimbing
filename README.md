@@ -64,4 +64,16 @@ list code
 - data masuk ke database postgresql dengan database bernama 'warehouse'
 <div style="text-align: center;">
     <img src="./images/postgresql.png" alt="Architecture Overview" width="500"/>
-</div>
+
+
+* Bila terjadi error saat build dan menjalankan beberapa container disarankan menjalankan ini:
+
+1. Run perintah ini dan pastikan semua container dalam keadaan stop atau tidak menyala
+`git config --global core.autocrlf input`
+
+2. Atur ulang repo menggunakan ini (jangan lupa simpan perubahan Anda):
+```
+git rm --cached -r .
+git reset --hard
+```
+3. Kemudian Run kembali container ya...

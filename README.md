@@ -1,6 +1,6 @@
 # Dibimbing-Ajied, Data Engineering Bootcamp
 
-# Kafka
+# Batch Processing
 
 <div style="text-align: center;">
   <img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*TzRyGCOSa4aZhda3B2H-qg.png" width="500">
